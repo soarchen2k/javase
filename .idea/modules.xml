@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/JavaSeDal.iml" filepath="$PROJECT_DIR$/JavaSeDal.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SandBox/SandBox.iml" filepath="$PROJECT_DIR$/SandBox/SandBox.iml" />
+      <module fileurl="file://$PROJECT_DIR$/algorithm算法/algorithm算法.iml" filepath="$PROJECT_DIR$/algorithm算法/algorithm算法.iml" />
+      <module fileurl="file://$PROJECT_DIR$/api/api.iml" filepath="$PROJECT_DIR$/api/api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/arrayList/arrayList.iml" filepath="$PROJECT_DIR$/arrayList/arrayList.iml" />
+      <module fileurl="file://$PROJECT_DIR$/assignment/assignment.iml" filepath="$PROJECT_DIR$/assignment/assignment.iml" />
+      <module fileurl="file://$PROJECT_DIR$/collection/collection.iml" filepath="$PROJECT_DIR$/collection/collection.iml" />
+      <module fileurl="file://$PROJECT_DIR$/customClass/customClass.iml" filepath="$PROJECT_DIR$/customClass/customClass.iml" />
+      <module fileurl="file://$PROJECT_DIR$/exception异常/exception异常.iml" filepath="$PROJECT_DIR$/exception异常/exception异常.iml" />
+      <module fileurl="file://$PROJECT_DIR$/extendsPractice/extendsPractice.iml" filepath="$PROJECT_DIR$/extendsPractice/extendsPractice.iml" />
+      <module fileurl="file://$PROJECT_DIR$/generic/generic.iml" filepath="$PROJECT_DIR$/generic/generic.iml" />
+      <module fileurl="file://$PROJECT_DIR$/interfacePractice/interfacePractice.iml" filepath="$PROJECT_DIR$/interfacePractice/interfacePractice.iml" />
+      <module fileurl="file://$PROJECT_DIR$/methodAndArray/methodAndArray.iml" filepath="$PROJECT_DIR$/methodAndArray/methodAndArray.iml" />
+      <module fileurl="file://$PROJECT_DIR$/oop/oop.iml" filepath="$PROJECT_DIR$/oop/oop.iml" />
+      <module fileurl="file://$PROJECT_DIR$/oprator/oprator.iml" filepath="$PROJECT_DIR$/oprator/oprator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/patterns生产模式/patterns生产模式.iml" filepath="$PROJECT_DIR$/patterns生产模式/patterns生产模式.iml" />
+      <module fileurl="file://$PROJECT_DIR$/static&amp;final&amp;object/static&amp;final&amp;object.iml" filepath="$PROJECT_DIR$/static&amp;final&amp;object/static&amp;final&amp;object.iml" />
+      <module fileurl="file://$PROJECT_DIR$/static关键字/static关键字.iml" filepath="$PROJECT_DIR$/static关键字/static关键字.iml" />
+      <module fileurl="file://$PROJECT_DIR$/string/string.iml" filepath="$PROJECT_DIR$/string/string.iml" />
+      <module fileurl="file://$PROJECT_DIR$/stringApiClass/stringApiClass.iml" filepath="$PROJECT_DIR$/stringApiClass/stringApiClass.iml" />
+      <module fileurl="file://$PROJECT_DIR$/thread多进程/thread多进程.iml" filepath="$PROJECT_DIR$/thread多进程/thread多进程.iml" />
+    </modules>
+  </component>
+</project>
