@@ -1,5 +1,10 @@
 package ca.monor.getMax;
 
+/**
+ * 递归 Recursion
+ * divide 分制类型递归
+ */
+
 import java.util.Arrays;
 import java.util.Random;
 
