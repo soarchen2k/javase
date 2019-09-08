@@ -10,7 +10,7 @@ public class Main {
         int[] arr = arrayProduct(10000000);
         System.out.println(System.currentTimeMillis() - startTime1);
 
-//        insertSort(arr);
+        insertSort(arr);
         long startTime2 = System.currentTimeMillis();
         Arrays.sort(arr);
         System.out.println(System.currentTimeMillis() - startTime2);

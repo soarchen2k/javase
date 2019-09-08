@@ -32,7 +32,7 @@ public class Main {
 
         int maxLeft = 0;
         int maxRight = 0;
-        int mid = (left + right) / 2;
+        int mid = left + (right - left >> 1);
         maxLeft = getMax(arr, left, mid);
         maxRight = getMax(arr, mid + 1, right);
         return Math.max(maxLeft, maxRight);
