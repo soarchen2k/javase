@@ -1,4 +1,4 @@
-package ca.monor.List链表;
+package ca.monor.list链表;
 
 public class SingleLinkedList<E> extends AbstractList {
     private Node<E> first;
