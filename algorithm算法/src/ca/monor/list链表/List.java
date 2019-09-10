@@ -1,4 +1,4 @@
-package ca.monor.list链表;
+package ca.monor.List链表;
 
 public interface List<E> {
     static final int ELEMENT_NOT_FOUND = -1;

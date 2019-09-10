@@ -18,7 +18,7 @@ public class ArrayList<E> {
         capacity = (capacity < DEFAULT_CAPACITY) ? DEFAULT_CAPACITY : capacity;
 
         //因爲 E 类型是Object 类的子类，可以无需判断，直接向下造型
-        elements = (E[]) new Object[capacity];
+        elements = (E[]) new Object[capacity];  //长度为capacity的数组
     }
 
     /**
@@ -92,8 +92,19 @@ public class ArrayList<E> {
         return ELEMENT_NOT_FOUND;
     }
 
-    private void ensureCapacity(int index) {
+    private void ensureCapacity(int capacity) {
+        int oldCapacity = elements.length;
+        if (oldCapacity >= capacity) return; //如果现有容量大于等于所需容量，则直接返回
 
+        // 新容量为旧容量的1.5倍
+        int newCapacity = oldCapacity + (oldCapacity >> 1);
+        E[] newElements = (E[]) new Object[newCapacity];  //向下造型
+        for (int i = 0; i < size; i++) {
+            newElements[i] = elements[i];
+        }
+        elements = newElements;
+
+        System.out.println(oldCapacity + "扩容为" + newCapacity);
     }
 
     private void rangeCheck(int index) {
