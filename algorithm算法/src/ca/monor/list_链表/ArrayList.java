@@ -1,7 +1,6 @@
-package ca.monor.list链表;
+package ca.monor.list_链表;
 
 import java.util.Objects;
-import java.util.stream.IntStream;
 
 public class ArrayList<E> extends AbstractList<E> {
     private static final int DEFAULT_CAPACITY = 10;
@@ -84,10 +83,20 @@ public class ArrayList<E> extends AbstractList<E> {
 
     @Override
     public int indexOf(E element) {
-        if (element == null)
-            for (int i = 0; i < size; i++) if (elements[i] == null) return i;
-        return IntStream.range(0, size).filter(i -> Objects.equals(elements[i], element))
-                .findFirst().orElse(super.ELEMENT_NOT_FOUND);
+        if (element == null) {
+            int i = 0;
+            while (i < size) {
+                if (elements[i] == null) return i;
+                i++;
+            }
+        }
+        int bound = size;
+        for (int i = 0; i < bound; i++) {
+            if (Objects.equals(elements[i], element)) {
+                return i;
+            }
+        }
+        return super.ELEMENT_NOT_FOUND;
     }
 
     @Override

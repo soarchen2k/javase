@@ -1,4 +1,4 @@
-package ca.monor.list链表.study学习链表;
+package ca.monor.list_链表.study学习链表;
 
 import java.util.LinkedList;
 

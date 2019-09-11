@@ -1,4 +1,4 @@
-package ca.monor.Demo02_SelectionSort;
+package ca.monor.SelectionSort选择排序;
 
 import java.util.Random;
 

@@ -1,4 +1,4 @@
-package ca.monor.list链表;
+package ca.monor.list_链表;
 
 import java.util.ArrayList;
 
