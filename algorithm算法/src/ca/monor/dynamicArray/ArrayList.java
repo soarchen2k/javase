@@ -17,7 +17,7 @@ public class ArrayList<E> {
 
     public ArrayList(int capacity) {  // 有参构造，可以定义容量
         // 长度小于默认长度则初始化数组长度为初始化长度
-        capacity = (capacity < DEFAULT_CAPACITY) ? DEFAULT_CAPACITY : capacity;
+        capacity = Math.max(capacity, DEFAULT_CAPACITY);
 
         //因爲 E 类型是Object 类的子类，可以无需判断，直接向下造型
         elements = (E[]) new Object[capacity];  //长度为capacity的数组
@@ -133,8 +133,6 @@ public class ArrayList<E> {
         throw new IndexOutOfBoundsException("Index: " + index + " size: " + size);
     }
 
-
-    @Override
     public String toString() {
         if (size < 0) {
             return "";

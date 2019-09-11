@@ -1,7 +1,7 @@
 package ca.monor.list链表;
 
 public class SingleLinkedList<E> extends AbstractList {
-    private Node<E> first;
+    private Node<E> first; // 定义链表的头节点
 
     private static class Node<E> {
         E element;
@@ -14,11 +14,17 @@ public class SingleLinkedList<E> extends AbstractList {
 
     @Override
     public void clear() {
-
+        size = 0;
+        first = null;
     }
 
     @Override
-    public Object get(int index) {
+    public E get(int index) {
+//        return node(index).element;
+        return null;
+    }
+
+    private E node(int index) {
         return null;
     }
 
