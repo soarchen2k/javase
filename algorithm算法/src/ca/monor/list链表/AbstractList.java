@@ -1,4 +1,4 @@
-package ca.monor.List链表;
+package ca.monor.list链表;
 
 public abstract class AbstractList<E> implements List<E> {
     /**

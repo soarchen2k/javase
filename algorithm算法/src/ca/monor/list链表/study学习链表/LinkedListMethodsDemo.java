@@ -43,7 +43,5 @@ public class LinkedListMethodsDemo {
         System.out.println(linkedList);
         linkedList.removeLastOccurrence("first");
         System.out.println(linkedList);
-
-
     }
 }

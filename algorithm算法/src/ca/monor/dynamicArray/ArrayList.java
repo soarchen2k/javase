@@ -1,5 +1,7 @@
 package ca.monor.dynamicArray;
 
+import java.util.stream.IntStream;
+
 public class ArrayList<E> {
     /**
      * 元素的数量
@@ -39,9 +41,7 @@ public class ArrayList<E> {
     }
 
     public void clear() {
-        for (int i = 0; i < size; i++) {
-            elements[i] = null;
-        }
+        IntStream.range(0, size).forEach(i -> elements[i] = null);
         size = 0;
     }
 
@@ -57,6 +57,16 @@ public class ArrayList<E> {
         }
         elements[index] = element;
         size++;
+    }
+
+    public E remove(int index) {
+        rangeCheck(index);
+        E removed = elements[index];
+        for (int i = size - 1; i > index; i--) {
+            elements[i - 1] = elements[i];
+        }
+        size--;
+        return removed;
     }
 
     public boolean contains(E element) {
@@ -121,5 +131,18 @@ public class ArrayList<E> {
 
     private void outOfBounds(int index) {
         throw new IndexOutOfBoundsException("Index: " + index + " size: " + size);
+    }
+
+
+    @Override
+    public String toString() {
+        if (size < 0) {
+            return "";
+        }
+        StringBuilder toString = new StringBuilder();
+        toString.append("[");
+        for (int i = 0; i < size; i++) toString.append(i == 0 ? elements[i] : ", " + elements[i]);
+        toString.append("]");
+        return toString.toString();
     }
 }
