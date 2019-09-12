@@ -4,12 +4,17 @@ public class LinkedList<E> extends AbstractList<E> {
     private Node<E> first;
     private Node<E> last;
 
-    private static class Node<E> {  //建立一个节点
+    private static class Node<E> {
+        /**
+         * 建立一个节点，创建内部私有类。一个节点由
+         * 节点元素 element，上一个节点，和下一个节点组成
+         */
+
         E element;
         Node<E> prev;
         Node<E> next;
 
-        public Node(E element, Node<E> prev, Node<E> next) {
+        public Node(E element, Node<E> prev, Node<E> next) {  //通过 3 个变量构成一个元素
             this.element = element;
             this.prev = prev;
             this.next = next;
@@ -83,7 +88,20 @@ public class LinkedList<E> extends AbstractList<E> {
     @Override
     public void add(int index, E element) {
         rangeCheckForAdd(index);
+        if (index == size) { //向后添加元素
 
+            Node<E> oldLast = last;
+            // 通过 oldLast 节点来记录之前的 last 节点
+
+            last = new Node<>(element, oldLast, null);
+            //为新的 last 节点赋值，使其值为 element，prev 指向 oleLast，next 指向 null
+            if (oldLast == null) {  //表示这是该链表添加的第一个 Node 节点
+                first = last; //首节点
+            } else {
+                oldLast.next = last;
+            }
+
+        }
     }
 
     @Override

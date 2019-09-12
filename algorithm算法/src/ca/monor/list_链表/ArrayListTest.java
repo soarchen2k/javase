@@ -6,7 +6,7 @@ public class ArrayListTest {
     public static void main(String[] args) {
         long start1 = System.currentTimeMillis();
         ArrayList<Integer> integerArrayList = new ArrayList<>();
-        int size = 80000000;
+        int size = 100000000;
         IntStream.range(0, size).forEachOrdered(integerArrayList::add);
         System.out.println(System.currentTimeMillis() - start1);
 
