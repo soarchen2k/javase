@@ -55,11 +55,6 @@ public class LinkedList<E> extends AbstractList<E> {
 
     private Node<E> node(int index) {
         rangeCheck(index);
-//        Node<E> node = first;
-//        for (int i = 0; i < size; i++) {
-//            node = node.next;
-//        }
-//        return node;
 
         if (index < (size >> 1)) { // index 在左半部分
             Node<E> node = first;  // 创建一个 Node 节点，指向首节点
@@ -100,17 +95,44 @@ public class LinkedList<E> extends AbstractList<E> {
             } else {
                 oldLast.next = last;
             }
-
         }
+        size++;
     }
 
     @Override
     public E remove(int index) {
-        return null;
+        rangeCheck(index);
+
+        // 定义出3个节点，分别是需要移出的节点，前一个节点，和后一个节点
+        Node<E> node = node(index);
+        Node<E> prev = node.prev;
+        Node<E> next = node.next;
+
+        if (prev == null) { //如果 index == 0，即移除第一个节点
+            first = next; //首节点指向第二个节点
+        } else {
+            prev = next; //前一个节点指向下一个节点，即断开前后节点与被删除节点的联系
+        }
+        size--;
+
+        return node.element;
     }
 
     @Override
     public int indexOf(E element) {
-        return 0;
+        if (element == null) { //如果节点元素为空
+            Node<E> node = first; //定义一个节点指向首节点
+            for (int i = 0; i < size; i++) {
+                if (node.element == null) return i; //如果该节点数据为空，则返回该节点位置 i (链表无下标)
+                node = node.next;
+            }
+        } else {
+            Node<E> node = first; //定义一个节点指向首节点
+            for (int i = 0; i < size; i++) {
+                if (node.element.equals(element)) return i;
+                node = node.next;
+            }
+        }
+        return ELEMENT_NOT_FOUND;
     }
 }
