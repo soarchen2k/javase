@@ -1,16 +1,10 @@
 package ca.monor.list_链表;
 
-/**
- * 不继承任何类，用一个单一类实现 linkedlist
- *
- * @param <E>
- */
-
-public class LinkedListAllInOne<E> {
+public class NewLinkedListAllInOne<E> {
     private static final int ELEMENT_NOT_FOUND = -1;
+    private int size;
     private Node<E> first;
     private Node<E> last;
-    private int size;
 
     private static class Node<E> {
         Node<E> prev;
@@ -26,22 +20,18 @@ public class LinkedListAllInOne<E> {
         @Override
         public String toString() {
             StringBuilder stringBuilder = new StringBuilder();
-            if (prev == null) {
-                stringBuilder.append("null");
-            } else {
-                stringBuilder.append(prev.element);
-            }
-
-            stringBuilder.append("_").append(element).append("_");
-
-            if (next == null) {
-                stringBuilder.append("null");
-            } else {
-                stringBuilder.append(next.element);
-            }
-
+            stringBuilder.append(prev == null ? "null" : prev.element).append("_")
+                    .append(element + "_").append(next == null ? "null" : next.element);
             return stringBuilder.toString();
         }
+    }
+
+    public int size() {
+        return size;
+    }
+
+    public boolean isEmpty() {
+        return size == 0;
     }
 
     public void clear() {
@@ -57,33 +47,15 @@ public class LinkedListAllInOne<E> {
 
     public E set(int index, E element) {
         rangeCheck(index);
-        E currentElement = node(index).element;
+
+        E old = node(index).element;
         node(index).element = element;
-        return currentElement;
-    }
-
-    public E remove(int index) {
-        rangeCheck(index);
-        Node<E> node = node(index);
-        Node<E> prev = node.prev;
-        Node<E> next = node.next;
-        if (prev == null) {
-            first = next;
-        } else {
-            prev.next = next;
-        }
-
-        if (next == null) {
-            last = prev;
-        } else {
-            next.prev = prev;
-        }
-        size--;
-        return node.element;
+        return old;
     }
 
     public int indexOf(E element) {
         Node<E> node = first;
+
         if (element == null) {
             for (int i = 0; i < size; i++) {
                 if (node.element == null) return i;
@@ -98,21 +70,27 @@ public class LinkedListAllInOne<E> {
         return ELEMENT_NOT_FOUND;
     }
 
+    public boolean contains(E element) {
+        return indexOf(element) != -1;
+    }
+
     public void add(int index, E element) {
         rangeCheckForAdd(index);
 
         if (index == size) {
             Node<E> oldLast = last;
             last = new Node<>(oldLast, element, null);
-            if (oldLast == null) first = last;
-            else oldLast.prev = last;
+            if (oldLast == null) {
+                first = last;
+            } else {
+                oldLast.next = last;
+            }
         } else {
             Node<E> next = node(index);
             Node<E> prev = next.prev;
             Node<E> node = new Node<>(prev, element, next);
             next.prev = node;
-
-            if (index == 0) {
+            if (prev == null) {
                 first = node;
             } else {
                 prev.next = node;
@@ -123,6 +101,44 @@ public class LinkedListAllInOne<E> {
 
     public void add(E element) {
         add(size, element);
+    }
+
+    public E remove(int index) {
+        rangeCheck(index);
+        Node<E> node = node(index);
+        Node<E> prev = node.prev;
+        Node<E> next = node.next;
+
+        if (prev == null) {
+            first = next;
+        } else {
+            prev.next = next;
+        }
+
+        if (next == null) {
+            last = prev;
+        } else {
+            next.prev = prev;
+        }
+
+        size--;
+        return node.element;
+    }
+
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Size: " + size + " [");
+        for (int i = 0; i < size; i++) {
+            stringBuilder.append(i == 0 ? node(i) : ", " + node(i));
+        }
+        stringBuilder.append("]");
+        return stringBuilder.toString();
+    }
+
+    private void rangeCheckForAdd(int index) {
+        if (index < 0 || index > size) {
+            outOfBounds(index);
+        }
     }
 
     private Node<E> node(int index) {
@@ -149,31 +165,7 @@ public class LinkedListAllInOne<E> {
         }
     }
 
-    private void rangeCheckForAdd(int index) {
-        if (index < 0 || index > size) {
-            outOfBounds(index);
-        }
-    }
-
     private void outOfBounds(int index) {
-        throw new IndexOutOfBoundsException("Index: " + index + ", size: " + size);
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder string = new StringBuilder();
-        string.append("size=").append(size).append(", [");
-        Node<E> node = first;
-        for (int i = 0; i < size; i++) {
-            if (i != 0) {
-                string.append(", ");
-            }
-
-            string.append(node);
-
-            node = node.next;
-        }
-        string.append("]");
-        return string.toString();
+        throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
     }
 }

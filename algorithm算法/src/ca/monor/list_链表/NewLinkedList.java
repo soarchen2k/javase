@@ -110,7 +110,13 @@ public class NewLinkedList<E> extends AbstractList<E> {
         if (prev == null) {
             first = next;
         } else {
-            prev = next;
+            prev.next = next;
+        }
+
+        if (next == null) {
+            last = prev;
+        } else {
+            next.prev = prev;
         }
         size--;
         return node.element;

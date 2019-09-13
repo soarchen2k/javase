@@ -36,12 +36,16 @@ public class SingleLinkedList<E> extends AbstractList<E> {
 
     @Override
     public void add(int index, E element) {
+        rangeCheckForAdd(index);
+
         if (index == 0) {
             first = new Node<>(element, first);
         } else {
             Node<E> prev = node(index - 1);
-
+            prev.next = new Node<>(element, prev.next); //第一个 prev.next 指向新节点，
+            // 后面的prev.next指向新节点建立前的前节点的后节点
         }
+        size++;
     }
 
     @Override

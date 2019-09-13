@@ -119,10 +119,16 @@ public class LinkedList<E> extends AbstractList<E> {
         Node<E> prev = node.prev;
         Node<E> next = node.next;
 
-        if (prev == null) { //如果 index == 0，即移除第一个节点
-            first = next; //首节点指向第二个节点
+        if (prev == null) { // 如果节点的 prev 为空，说明需移除的节点是第一个节点
+            first = next; // 使原来的第二个节点成为首节点
         } else {
-            prev = next; //前一个节点指向下一个节点，即断开前后节点与被删除节点的联系
+            prev.next = next; // 如果不是首节点，就让上一个节点的指针指向下一个节点，断开当前节点与下一个节点的联系
+        }
+
+        if (next == null) { //如果当前节点的下一个节点为空，说明需移除尾节点
+            last = prev; //使原来的倒数第二个节点称为尾节点
+        } else {
+            next.prev = prev; //如果不为空，使下一个节点的头指针指向前一个节点，断开当前节点与上一个节点的联系
         }
         size--;
 
