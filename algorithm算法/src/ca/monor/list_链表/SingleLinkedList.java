@@ -2,7 +2,7 @@ package ca.monor.list_链表;
 
 /**
  * 单链表
- *
+ * 不带虚拟节点
  * @param <E>
  */
 

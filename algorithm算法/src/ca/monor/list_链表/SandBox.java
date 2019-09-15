@@ -2,7 +2,7 @@ package ca.monor.list_链表;
 
 public class SandBox {
     public static void main(String[] args) {
-        NewSingleLinkedList<Integer> linkedList = new NewSingleLinkedList<>();
+        SingleLinkedList2<Integer> linkedList = new SingleLinkedList2<>();
         linkedList.add(5);
         linkedList.add(10);
         linkedList.add(1, 12);
