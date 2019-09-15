@@ -90,7 +90,7 @@ public class NewLinkedListAllInOne<E> {
             Node<E> prev = next.prev;
             Node<E> node = new Node<>(prev, element, next);
             next.prev = node;
-            if (prev == null) {
+            if (index == 0) {
                 first = node;
             } else {
                 prev.next = node;

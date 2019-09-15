@@ -1,7 +1,13 @@
 package ca.monor.list_链表;
 
+/**
+ * 单链表
+ *
+ * @param <E>
+ */
+
 public class SingleLinkedList<E> extends AbstractList<E> {
-    private Node<E> first;
+    private Node<E> first;  //单链表为单向，只有头节点
 
     private static class Node<E> { //如果写内部类，前面一律加 private static
         E element;
@@ -50,7 +56,17 @@ public class SingleLinkedList<E> extends AbstractList<E> {
 
     @Override
     public E remove(int index) {
-        return null;
+        rangeCheck(index);
+        Node<E> node = node(index);
+        E old = node(index).element;
+        if (index == 0) {
+            first = node.next;
+        } else {
+            Node<E> prev = node(index - 1);
+            prev.next = node.next;
+        }
+        size--;
+        return old;
     }
 
     @Override
@@ -68,6 +84,19 @@ public class SingleLinkedList<E> extends AbstractList<E> {
             }
         }
         return ELEMENT_NOT_FOUND;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Size: " + size + ", [");
+        Node<E> node = first;
+        for (int i = 0; i < size; i++) {
+            stringBuilder.append(i == 0 ? node.element : ", " + node.element);
+            node = node.next;
+        }
+        stringBuilder.append("]");
+        return stringBuilder.toString();
     }
 
     private Node<E> node(int index) {
