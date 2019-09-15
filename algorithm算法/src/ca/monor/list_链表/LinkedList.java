@@ -1,8 +1,8 @@
 package ca.monor.list_链表;
 
 public class LinkedList<E> extends AbstractList<E> {
-    private Node<E> first; //null 头节点为空
-    private Node<E> last; //null 尾节点为空
+    private Node<E> first; //表示属性，初始时null 头节点为空
+    private Node<E> last; //表示属性，初始时null 尾节点为空
 
     private static class Node<E> {
         /**
@@ -119,13 +119,13 @@ public class LinkedList<E> extends AbstractList<E> {
         Node<E> prev = node.prev;
         Node<E> next = node.next;
 
-        if (prev == null) { // 如果节点的 prev 为空，说明需移除的节点是第一个节点
+        if (prev == null) { //或 index==0 如果节点的 prev 为空，说明需移除的节点是第一个节点
             first = next; // 使原来的第二个节点成为首节点
         } else {
             prev.next = next; // 如果不是首节点，就让上一个节点的指针指向下一个节点，断开当前节点与下一个节点的联系
         }
 
-        if (next == null) { //如果当前节点的下一个节点为空，说明需移除尾节点
+        if (next == null) { // 或 index == size -1如果当前节点的下一个节点为空，说明需移除尾节点
             last = prev; //使原来的倒数第二个节点称为尾节点
         } else {
             next.prev = prev; //如果不为空，使下一个节点的头指针指向前一个节点，断开当前节点与上一个节点的联系

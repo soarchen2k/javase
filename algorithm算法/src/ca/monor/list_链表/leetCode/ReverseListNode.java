@@ -5,7 +5,6 @@ public class ReverseListNode {
         if (head == null || head.next == null) {
             return head;
         }
-
         ListNode newHead = null;
         while (head != null) {
             ListNode tmp = head.next;
