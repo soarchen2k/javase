@@ -1,4 +1,4 @@
-package ca.monor.list_链表;
+package ca.monor.list_链表.SingleLinkedList;
 
 public class NewSingleLinkedList<E> {
     private Node<E> first;

@@ -1,4 +1,4 @@
-package ca.monor.list_链表;
+package ca.monor.list_链表.SingleLinkedList;
 
 /**
  * 增加一个虚拟头节点

@@ -1,4 +1,6 @@
-package ca.monor.list_链表;
+package ca.monor.list_链表.SingleLinkedList;
+
+import ca.monor.list_链表.AbstractList;
 
 /**
  * 单链表
@@ -7,6 +9,7 @@ package ca.monor.list_链表;
  */
 
 public class SingleLinkedList<E> extends AbstractList<E> {
+    private int size;
     private Node<E> first;  //单链表为单向，只有头节点
 
     private static class Node<E> { //如果写内部类，前面一律加 private static

@@ -1,5 +1,7 @@
 package ca.monor.list_链表;
 
+import ca.monor.list_链表.SingleLinkedList.SingleLinkedList2;
+
 public class SandBox {
     public static void main(String[] args) {
         SingleLinkedList2<Integer> linkedList = new SingleLinkedList2<>();

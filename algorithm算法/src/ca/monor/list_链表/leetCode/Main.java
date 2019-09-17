@@ -1,6 +1,6 @@
 package ca.monor.list_链表.leetCode;
 
-import ca.monor.list_链表.SingleLinkedList;
+import ca.monor.list_链表.SingleLinkedList.SingleLinkedList;
 
 public class Main {
     public static void main(String[] args) {

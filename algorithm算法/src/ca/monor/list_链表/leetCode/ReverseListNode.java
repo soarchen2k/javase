@@ -1,7 +1,13 @@
 package ca.monor.list_链表.leetCode;
 
 public class ReverseListNode {
-    public ListNode reverseListNode(ListNode head) {
+    /**
+     * Method 1 Iterator
+     *
+     * @param head
+     * @return
+     */
+    public ListNode ReverseListNode(ListNode head) {
         if (head == null || head.next == null) {
             return head;
         }
