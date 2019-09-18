@@ -1,32 +1,12 @@
 package ca.monor.leetCode.validParentheses;
 
-/**
- * 20. 有效的括号
- * https://leetcode-cn.com/problems/valid-parentheses/solution/
- */
-
 import ca.monor.stack栈.Stack;
-import java.util.Scanner;
 
-public class ValidParentheses {
-    private Stack<Character> leftParentheses;
-    private Scanner scanner;
-    private String parentheses;
-
-    public ValidParentheses() {
-        this.leftParentheses = new Stack<>();
-        this.scanner = new Scanner(System.in);
-    }
-
-    public void setParentheses() {
-        System.out.print("Give some parentheses: ");
-        this.parentheses = scanner.nextLine();
-    }
-
-    public boolean isValid() {
-
-        for (int i = 0; i < this.parentheses.length(); i++) {
-            char c = this.parentheses.charAt(i);
+public class Solution2 {
+    public boolean isValid(String s) {
+        Stack<Character> leftParentheses = new Stack<>();
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
             if (c == '{' || c == '[' || c == '(') {  // 用单引号包裹 char 划重点
                 // 左括号一律进Stack
                 leftParentheses.push(c);
