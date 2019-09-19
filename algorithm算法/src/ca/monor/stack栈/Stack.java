@@ -53,6 +53,13 @@ public class Stack<E> {
         return Objects.hash(stack);
     }
 
+    @Override
+    public String toString() {
+        return "Stack{" +
+                "stack=" + stack +
+                '}';
+    }
+
     public static void main(String[] args) {
         Stack<Integer> stack = new Stack<>();
         stack.push(1);
