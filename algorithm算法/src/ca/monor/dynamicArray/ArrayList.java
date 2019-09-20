@@ -65,7 +65,7 @@ public class ArrayList<E> {
         for (int i = size - 1; i > index; i--) {
             elements[i - 1] = elements[i];
         }
-        size--;
+        elements[--size] = null;  //ArrayList的底层是数组，需要把最后一个元素置空，否则会继续占用内存
         return removed;
     }
 

@@ -1,17 +1,11 @@
 package ca.monor.leetCode.basicCalculator;
 /**
- * 224. Basic Calculator
- * https://leetcode.com/problems/basic-calculator/
- *
- * Success
- * Details
- * Runtime: 109 ms, faster than 5.67% of Java online submissions for Basic Calculator.
- * Memory Usage: 56.8 MB, less than 20.00% of Java online submissions for Basic Calculator.
+ * 改成只有加减法的
  */
 
 import ca.monor.stack栈.Stack;
 
-public class BasicCalculator {
+public class BasicCalculator2 {
     public int calculate(String s) {
         return evalRPN(toStringArray(toEvalRPN(s)));
     }
