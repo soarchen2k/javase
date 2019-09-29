@@ -6,13 +6,26 @@ public class JosephusLinkedList<E> {
     private Node<E> current;
     private static final int ELEMENT_NOT_FOUND = -1;
 
+    public void next() {
+        current = current.next;
+    }
+
+    public void reset() {
+        current = first;
+    }
+
     private static class Node<E> {
         Node<E> next;
         E element;
 
-        public Node(E element, Node<E> next) {
+        Node(E element, Node<E> next) {
             this.next = next;
             this.element = element;
+        }
+
+        @Override
+        public String toString() {
+            return "" + element + "_" + next.element;
         }
     }
 
@@ -62,6 +75,10 @@ public class JosephusLinkedList<E> {
         return old;
     }
 
+    public void add(E element) {
+        add(size, element);
+    }
+
     public void add(int index, E element) {
         rangeCheckForAdd(index);
 
@@ -77,6 +94,44 @@ public class JosephusLinkedList<E> {
             prev.next = new Node<>(element, prev.next);
         }
         size++;
+    }
+
+    public E remove() {
+        if (current == null) return null;
+
+        Node<E> next = current.next;
+        E e = remove(current);
+        if (size == 0) {
+            current = null;
+        } else {
+            current = next;
+        }
+        return e;
+    }
+
+    public E remove(int index) {
+        rangeCheck(index);
+        Node<E> node = node(index);
+        remove(node);
+        return node.element;
+    }
+
+    public E remove(Node<E> node) {
+        E e = node.element;
+        if (node == first) {
+            if (size == 1) {
+                first = null;
+            } else {
+                Node<E> last = node(size - 1);
+                last.next = first.next;
+                first = first.next;
+            }
+        } else {
+            Node<E> prev = node(indexOf(node.element) - 1);
+            prev.next = node.next;
+        }
+        size--;
+        return e;
     }
 
     private void rangeCheckForAdd(int index) {
@@ -102,5 +157,10 @@ public class JosephusLinkedList<E> {
 
     private void outOfBounds(int index) {
         throw new IndexOutOfBoundsException();
+    }
+
+    @Override
+    public String toString() {
+        return "size=" + size + ", first=" + first + ", element:" + current + "_" + current.next;
     }
 }

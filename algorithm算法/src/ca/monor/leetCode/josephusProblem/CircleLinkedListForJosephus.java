@@ -17,6 +17,11 @@ public class CircleLinkedListForJosephus<E> {
             this.element = element;
             this.next = next;
         }
+
+        @Override
+        public String toString() {
+            return "element: " + element;
+        }
     }
 
     public int size() {
@@ -184,5 +189,9 @@ public class CircleLinkedListForJosephus<E> {
         throw new IndexOutOfBoundsException("Index: " + index + ", size: " + size);
     }
 
+    @Override
+    public String toString() {
+        return "size=" + size + ", first=" + first + ", last=" + last + ", current=" + current;
+    }
 
 }

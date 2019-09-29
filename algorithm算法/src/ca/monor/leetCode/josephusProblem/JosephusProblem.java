@@ -7,27 +7,26 @@ public class JosephusProblem {
         Scanner scanner = new Scanner(System.in);
         System.out.print("How many peoples? ");
         int people = Integer.parseInt(scanner.nextLine());
-        System.out.println("How many to kill? ");
+        System.out.print("How many to kill? ");
         int kill = Integer.parseInt(scanner.nextLine());
 
-        CircleLinkedListForJosephus peoples = addPeople(people);
+        JosephusLinkedList peoples = addPeople(people);
         peoples.reset();
 
         kill(kill, peoples);
     }
 
-    private void kill(int kill, CircleLinkedListForJosephus peoples) {
-        kill -= 1;
+    private void kill(int kill, JosephusLinkedList peoples) {
         while (!peoples.isEmpty()) {
-            for (int i = 0; i < kill; i++) {
+            for (int i = 0; i < kill - 1; i++) {
                 peoples.next();
             }
-            System.out.println(peoples.remove());
+            peoples.remove();
         }
     }
 
-    private CircleLinkedListForJosephus addPeople(int people) {
-        CircleLinkedListForJosephus list1 = new CircleLinkedListForJosephus();
+    private JosephusLinkedList addPeople(int people) {
+        JosephusLinkedList list1 = new JosephusLinkedList();
         for (int i = 1; i <= people; i++) {
             list1.add(i);
         }
@@ -37,8 +36,5 @@ public class JosephusProblem {
     public static void main(String[] args) {
         JosephusProblem run = new JosephusProblem();
         run.JosephusProblem();
-        JosephusLinkedList<Integer> list = new JosephusLinkedList<>();
-
     }
-
 }
