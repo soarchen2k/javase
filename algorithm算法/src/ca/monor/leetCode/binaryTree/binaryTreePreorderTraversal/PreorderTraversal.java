@@ -15,7 +15,7 @@ class TreeNode {
 }
 
 class Solution {
-    public List<Integer> PreorderTraversal(TreeNode root) {
+    public List<Integer> preorderTraversal(TreeNode root) {
         Stack<TreeNode> stack = new Stack<>();
         List<Integer> list = new LinkedList<>();
 
