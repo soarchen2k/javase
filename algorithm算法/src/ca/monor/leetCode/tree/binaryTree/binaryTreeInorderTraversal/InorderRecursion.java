@@ -1,4 +1,4 @@
-package ca.monor.leetCode.binaryTree.binaryTreeInorderTraversal;
+package ca.monor.leetCode.tree.binaryTree.binaryTreeInorderTraversal;
 
 import java.util.LinkedList;
 import java.util.List;

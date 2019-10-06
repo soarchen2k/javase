@@ -1,4 +1,10 @@
-package ca.monor.leetCode.binaryTree.maximumDepthOfBinaryTree;
+package ca.monor.leetCode.tree.binaryTree.maximumDepthOfBinaryTree;
+/**
+ * 104. Maximum Depth of Binary Tree
+ * https://leetcode.com/problems/maximum-depth-of-binary-tree/
+ * <p>
+ * 层序遍历法解最大深度问题
+ */
 
 import java.util.LinkedList;
 import java.util.Queue;

@@ -1,4 +1,8 @@
-package ca.monor.leetCode.binaryTree.binaryTreeInorderTraversal;
+package ca.monor.leetCode.tree.binaryTree.binaryTreeInorderTraversal;
+/**
+ * 94. Binary Tree Inorder Traversal
+ * https://leetcode.com/problems/binary-tree-inorder-traversal/
+ */
 
 import java.util.LinkedList;
 import java.util.List;
