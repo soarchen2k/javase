@@ -77,7 +77,15 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
         }
         if (node.hasTwoChildren()) {  //节点的度为 2，需找出其后继结点
             Node<E> s = successor(node);
+            //用后继结点的值覆盖度为2的节点的值
+            node.element = s.element;
+            //删除后继结点
+            node = s;
         }
+
+        //删除 node 节点，node 的度必定是 0 或 1
+        Node<E> replacement = node.left != null ? node.left : node.right;
+
     }
 
     private Node<E> successor(Node<E> node) {
