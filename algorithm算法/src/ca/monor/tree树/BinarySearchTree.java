@@ -75,16 +75,39 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
         if (node == null) { //节点为空，则无法进行 remove 操作
             return;
         }
-        if (node.hasTwoChildren()) {  //节点的度为 2，需找出其后继结点
+        if (node.hasTwoChildren()) {  // 如果节点的度为 2，需找出其后继结点，
+                                      // 并用后继结点替代 node 节点
             Node<E> s = successor(node);
             //用后继结点的值覆盖度为2的节点的值
             node.element = s.element;
             //删除后继结点
-            node = s;
+            node = s;  //把 S 赋值给 node，之后删除 node，相当于删除s，由于
+                       //S 的值已经覆盖原 node，所以无影响
         }
 
-        //删除 node 节点，node 的度必定是 0 或 1
+        // 删除 node 节点，因爲第一个 if 已经过滤掉了 node hasTwoChildren 的情况
+        // 所以 node 的度必定是 0 或 1，定义一个 replacement 节点
         Node<E> replacement = node.left != null ? node.left : node.right;
+
+        if (replacement != null) { // 说明 node 是度为1的节点
+            replacement.parent = node.parent;  // 找出 node 节点的 parent，让 replacement
+                                               // 的 parent 指向 node 的 parent
+            if (node.parent == null) {  // node 为 root 节点
+                root = replacement;     //让 replacement 成为新的 root 节点
+            } else if (node == node.parent.left) { //如果 node 不是 root 节点，而是其父节点的左子节点
+                node.parent.left = replacement;  //让 node 的父节点的左子节点指向 replacement，断开 node 与父节点的联系
+            } else {
+                node.parent.right = replacement;
+            }
+        } else if (node.parent == null) {
+            root = null;
+        } else {
+            if (node == node.parent.left) {
+                node.parent.left = null;
+            } else {
+                node.parent.right = null;
+            }
+        }
 
     }
 
