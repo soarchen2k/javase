@@ -1,8 +1,6 @@
 package ca.monor.tree树;
 
 import ca.monor.tree树.printer.BinaryTreeInfo;
-import org.omg.CORBA.PUBLIC_MEMBER;
-
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -142,16 +140,29 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
         return 1 + Math.max(height2(root.left), height2(root.right));
     }
 
-    public boolean isComplete() {
+    public boolean isComplete() {  //判断一棵树是否是完全二叉树
         if (root == null) {
             return false;
         }
 
         Queue<Node<E>> queue = new LinkedList<>();
         queue.offer(root);  //先将 root 入队
-        boolean leaf = false;  //叶节点模式开关
+        boolean leaf = false;  //叶节点模式开关，当开始有第一个叶节点之后，后面的节点都应该是叶节点，
+        // 未出现叶节点时，则叶节点模式为 false
         while (!queue.isEmpty()) {
-            return false;
+            root = queue.poll();
+            if (leaf && !root.isLeaf()) {  // 在叶节点模式中，一旦发现非叶节点，就返回 false
+                return false;
+            }
+
+            if (root.hasTwoChildren()) {  // 如果节点有两个子节点，就把两个子节点都入栈
+                queue.offer(root.left);
+                queue.offer(root.right);
+            } else if (root.left == null && root.right != null) {
+                return false;   //由完全二叉树的性质可知，如果一个节点左子树为空而右子树不为空，则一定不是完全二叉树
+            } else {  // 左右子树都为空，或左子树不为空，右子树为空，此时即可打开叶节点开关，此后的节点都应该是叶节点
+                leaf = true;
+            }
         }
         return true;
     }
