@@ -7,7 +7,6 @@ public class Main {
         User member2 = new Member("Kate", 100,((Master) master).getMoney());
         master.setBalance(1000);
         master.redBag();
-        double redBag = ((Master) master).getMoney();
         member1.redBag();
         member2.redBag();
         master.showBalance();
