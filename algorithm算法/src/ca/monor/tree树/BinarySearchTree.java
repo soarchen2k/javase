@@ -1,8 +1,11 @@
 package ca.monor.tree树;
 
 import ca.monor.tree树.printer.BinaryTreeInfo;
+import org.omg.CORBA.PUBLIC_MEMBER;
 
 import java.util.Comparator;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class BinarySearchTree<E> implements BinaryTreeInfo {
     private int size;
@@ -96,19 +99,61 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
                 root = replacement;     //让 replacement 成为新的 root 节点
             } else if (node == node.parent.left) { //如果 node 不是 root 节点，而是其父节点的左子节点
                 node.parent.left = replacement;  //让 node 的父节点的左子节点指向 replacement，断开 node 与父节点的联系
-            } else {
-                node.parent.right = replacement;
+            } else { //node == node.parent.right
+                node.parent.right = replacement; //让 node 的父节点的右子节点指向 replacement，断开 node 与父节点的联系
             }
-        } else if (node.parent == null) {
+        } else if (node.parent == null) { //  第一个条件不满足，且 node 的父节点为空，说明是当前树唯一的节点，
+                                          // 并且是 root 节点，直接把当前节点赋值为空即可删除该节点
             root = null;
-        } else {
-            if (node == node.parent.left) {
+        } else {  // 该节点不是唯一的 root 节点，并且不是叶节点
+            if (node == node.parent.left) {  //当 node 为父节点的左子节点时，令左子节点为空，即删除左子节点
                 node.parent.left = null;
-            } else {
+            } else {  // node == node.parent.right  //当 node 为父节点的右子节点时，令右子节点为空，即删除右子节点
                 node.parent.right = null;
             }
         }
+    }
 
+    public int height() {
+        if (root == null) return 0;
+        Queue<Node<E>> nodes = new LinkedList<>();
+        nodes.offer(root);
+        int levelSize = 1;
+        int height = 0;
+        while (!nodes.isEmpty()) {
+            root = nodes.poll();
+            if (root.left!=null) nodes.offer(root.left);
+            if (root.right!=null) nodes.offer(root.right);
+            levelSize--;
+            if (levelSize == 0) {
+                height++;
+                levelSize = nodes.size();
+            }
+        }
+        return height;
+    }
+
+    public int height2() { //recursion
+        if (root == null) return 0;
+        return height2(root);
+    }
+
+    private int height2(Node<E> root) {
+        return 1 + Math.max(height2(root.left), height2(root.right));
+    }
+
+    public boolean isComplete() {
+        if (root == null) {
+            return false;
+        }
+
+        Queue<Node<E>> queue = new LinkedList<>();
+        queue.offer(root);  //先将 root 入队
+        boolean leaf = false;  //叶节点模式开关
+        while (!queue.isEmpty()) {
+            return false;
+        }
+        return true;
     }
 
     private Node<E> successor(Node<E> node) {
@@ -116,7 +161,7 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
             return null;
         }
 
-        //前驱结点在左子树当中 (right.left.left.left....)
+        //如果后继结点在右子树的左子树当中 (right.left.left.left....)
         Node<E> p = node.right;
         if (p != null) {
             while (p.left != null) {
@@ -125,11 +170,100 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
             return p;
         }
 
-        //从父节点，祖父节点中查找前驱结点
+        //从父节点，祖父节点中查找后继结点(节点是叶节点，或者只有左子节点)
         while (node.parent != null && node == node.parent.right) {
             node = node.parent;
         }
         return node.parent;
+    }
+
+    private Node<E> predecessor(Node<E> node) {
+        if (node == null) {
+            return null;
+        }
+
+        //如果前驱结点在左子树的右子树中
+        Node<E> p = node.left;
+        if (p != null) {
+            while (p.right != null) {
+                p = p.right;
+            }
+            return p;
+        }
+
+        //如果前驱结点在父节点、祖父节点中查找前驱(节点是叶节点，或者只有右子节点)
+        while (node.parent != null && node == node.parent.left) {
+            node = node.parent;
+        }
+        return node.parent;
+    }
+
+    public static abstract class Visitor<E>{
+        boolean stop;
+
+        /**
+         * 如果返回 true，就停止遍历
+         */
+
+        public abstract boolean visit(E element);
+    }
+
+    public void preOrder(Visitor<E> visitor) {
+        if (visitor == null) {
+            return;
+        }
+        preOrder(root,visitor);
+    }
+
+    private void preOrder(Node<E> node, Visitor<E> visitor) {
+        if (node==null||visitor.stop) return;
+        visitor.stop = visitor.visit(node.element);
+        preOrder(node.left, visitor);
+        preOrder(node.right, visitor);
+    }
+
+    public void inOrder(Visitor<E> visitor) {
+        if (visitor == null) {
+            return;
+        }
+        inOrder(root, visitor);
+    }
+
+    private void inOrder(Node<E> node, Visitor<E> visitor) {
+        if (node == null || visitor.stop) {
+            return;
+        }
+        inOrder(node.left, visitor);
+        visitor.visit(node.element);
+        inOrder(node.right, visitor);
+    }
+
+    public void postOrder(Visitor<E> visitor) {
+        if (visitor==null) return;
+        postOrder(root, visitor);
+    }
+
+    private void postOrder(Node<E> node, Visitor<E> visitor) {
+        if (node == null || visitor.stop) {
+            return;
+        }
+        postOrder(node.left, visitor);
+        postOrder(node.right, visitor);
+        visitor.visit(node.element);
+    }
+
+    public void levelOrder(Visitor<E> visitor) {
+        if (root == null || visitor == null) return;
+        Queue<Node<E>> queue = new LinkedList<>();
+        queue.offer(root);
+//        int levelSize = 1; // 如果不进行高度的计算，可以不要 levelSize
+        while (!queue.isEmpty()) {
+            root = queue.poll();
+            visitor.visit(root.element);
+            if (root.left != null) queue.offer(root.left);
+            if (root.right != null) queue.offer(root.right);
+//            levelSize--;
+        }
     }
 
     private Node<E> node(E element) {  //查找元素所在的节点，因为是 BST，所有没有重复的节点
@@ -164,25 +298,45 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
         }
     }
 
+    public String toString() {  //调用带参数的 toString 函数进行打印
+        StringBuilder sb = new StringBuilder();
+        toString(root, sb, "");
+        return sb.toString();
+    }
+
+    // 使用中序遍历进行
+    private void toString(Node<E> node, StringBuilder sb, String prefix) {
+        if (node==null) return;
+        toString(node.left, sb, prefix + "L---");
+        sb.append(prefix).append(node.element).append("/n");
+        toString(node.right, sb, prefix + "R---");
+
+    }
+
     @Override
 
     public Object root() {
-        return null;
+        return root;
     }
 
     @Override
     public Object left(Object node) {
-        return null;
+        return ((Node<E>) node).left;
     }
 
     @Override
     public Object right(Object node) {
-        return null;
+        return ((Node<E>) node).right;
     }
 
     @Override
     public Object string(Object node) {
-        return null;
+        Node<E> myNode = (Node<E>)node;
+        String parentString = "null";
+        if (myNode.parent != null) {
+            parentString = myNode.parent.element.toString();
+        }
+        return myNode.element + "_p(" + parentString + ")";
     }
 
     private static class Node<E> {
