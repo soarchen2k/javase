@@ -84,7 +84,35 @@ public class BinaryTree<E> implements BinaryTreeInfo {
     }
 
     protected Node<E> predecessor(Node<E> node) {
+        if (node == null) return null;
+        Node<E> p = node.left;
+        if (p != null) {
+            while (p.right != null) {
+                p = p.right;
+            }
+            return p;
+        }
 
+        while (node.parent != null && node.parent.left == node) {
+            return node.parent;
+        }
+        return node.parent;
+    }
+
+    protected Node<E> successor(Node<E> node) {
+        if (node == null) return null;
+        if (node.right != null) {
+            Node<E> s = node.right;
+            while (s.left != null) {
+                s = s.left;
+            }
+            return s;
+        }
+
+        while (node.parent != null && node.parent.right == node) {
+            return node.parent;
+        }
+        return node.parent;
     }
 
     @Override
