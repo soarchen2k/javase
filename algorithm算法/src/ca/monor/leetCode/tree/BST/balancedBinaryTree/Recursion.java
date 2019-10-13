@@ -1,4 +1,4 @@
-package ca.monor.leetCode.tree.BBST.balancedBinaryTree;
+package ca.monor.leetCode.tree.BST.balancedBinaryTree;
 
 public class Recursion {
     public class TreeNode {
