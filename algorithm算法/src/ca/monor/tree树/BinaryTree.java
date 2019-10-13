@@ -2,7 +2,6 @@ package ca.monor.tree树;
 
 
 import ca.monor.tree树.printer.BinaryTreeInfo;
-
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -23,6 +22,88 @@ public class BinaryTree<E> implements BinaryTreeInfo {
         root = null;
     }
 
+    public void preOrder(Visitor<E> visitor) {
+        if (visitor == null) {
+            return;
+        }
+
+        preOrder(root, visitor);
+    }
+
+    private void preOrder(Node<E> node, Visitor<E> visitor) {
+        if (node == null && visitor.stop) {
+            return;
+        }
+        assert node != null;
+        visitor.stop = visitor.visit(node.element);
+        preOrder(node.left, visitor);
+        preOrder(node.right, visitor);
+    }
+
+    public void inOrder(Visitor<E> visitor) {
+        if (visitor == null) {
+            return;
+        }
+        inOrder(root, visitor);
+    }
+
+    private void inOrder(Node<E> node, Visitor<E> visitor) {
+        if (node == null && visitor.stop) {
+            return;
+        }
+        inOrder(node.left, visitor);
+        visitor.stop = visitor.visit(node.element);
+        inOrder(node.right, visitor);
+    }
+
+    public void postOrder(Visitor<E> visitor) {
+        if (visitor == null) {
+            return;
+        }
+        postOrder(root, visitor);
+    }
+
+    private void postOrder(Node<E> node, Visitor<E> visitor) {
+        if (node == null && visitor.stop) {
+            return;
+        }
+        postOrder(node.left, visitor);
+        postOrder(node.right, visitor);
+        visitor.stop = visitor.visit(root.element);
+    }
+
+    private static abstract class Visitor<E> {
+        boolean stop;
+
+        // 如果 stop 返回 true，则停止遍历
+        abstract boolean visit(E element);
+    }
+
+    public boolean isComplete2() {
+        if (root == null) return false;
+        Queue<Node<E>> queue = new LinkedList<>();
+        queue.offer(root);
+        boolean leaf = false;
+        while (!queue.isEmpty()) {
+            root = queue.poll();
+            if (leaf && !root.isLeaf()) {
+                return false;
+            }
+            if (root.left != null) {
+                queue.offer(root.left);
+            } else if (root.right != null) { //root.left == null && root.right == null
+                return false;
+            }
+
+            if (root.right != null) {
+                queue.offer(root.right);
+            } else {  //root.left != null && root.right == null
+                leaf = true;
+            }
+        }
+        return true;
+    }
+
     public boolean isComplete() {
         if (root == null) {
             return false;
@@ -34,6 +115,9 @@ public class BinaryTree<E> implements BinaryTreeInfo {
 
         while (!queue.isEmpty()) {
             root = queue.poll();
+            if (leaf && !root.isLeaf()) {
+                return false;
+            }
             if (root.hasTwoChildren()) {
                 queue.offer(root.left);
                 queue.offer(root.right);
@@ -79,7 +163,7 @@ public class BinaryTree<E> implements BinaryTreeInfo {
         return 1 + Math.max(height2(root.left), height2(root.right));
     }
 
-    protected Node<E> creatNode(E element, Node<E> parent) {
+    protected Node<E> createNode(E element, Node<E> parent) {
         return new Node<E>(element, parent);
     }
 
