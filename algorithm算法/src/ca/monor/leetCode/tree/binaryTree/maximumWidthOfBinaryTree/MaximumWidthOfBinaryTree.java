@@ -2,8 +2,6 @@ package ca.monor.leetCode.tree.binaryTree.maximumWidthOfBinaryTree;
 /**
  * 662. Maximum Width of Binary Tree
  * https://leetcode.com/problems/maximum-width-of-binary-tree/
- * <p>
- * 未解出
  */
 
 import java.util.LinkedList;
@@ -21,45 +19,32 @@ public class MaximumWidthOfBinaryTree {
     }
 
     public int widthOfBinaryTree(TreeNode root) {
-        Queue<TreeNode> queue = new LinkedList<>();
         if (root == null) {
             return 0;
         }
-        int depth = maxDepth(root, queue);
+        Queue<TreeNode> queue = new LinkedList<>();
+        LinkedList<Integer> linkedList = new LinkedList<>();
         queue.offer(root);
         int width = 1;
-        int levelSize = queue.size();
-        for (int i = 0; i < depth; i++) {
-            while (levelSize > 0) {
-                root = queue.poll();
-                queue.offer(root.left);
-                queue.offer(root.right);
-                levelSize--;
-            }
-            levelSize = queue.size();
-            width = Math.max(width, levelSize);
-        }
-        return width;
-    }
-
-    private int maxDepth(TreeNode root, Queue<TreeNode> queue) {
-
-        queue.offer(root);
-        int depth = 0;
+        linkedList.add(1);
         while (!queue.isEmpty()) {
             int levelSize = queue.size();
-            while (levelSize > 0) {
+            for (int i = levelSize; i > 0; i--) {
                 root = queue.poll();
+                int index = linkedList.removeFirst();
                 if (root.left != null) {
                     queue.offer(root.left);
+                    linkedList.add(index << 1);
                 }
                 if (root.right != null) {
                     queue.offer(root.right);
+                    linkedList.add((index << 1) + 1);
                 }
-                levelSize--;
             }
-            depth++;
+            if (linkedList.size() >= 2) {
+                width = Math.max(width, linkedList.getLast() - linkedList.getFirst() + 1);
+            }
         }
-        return depth;
+        return width;
     }
 }
