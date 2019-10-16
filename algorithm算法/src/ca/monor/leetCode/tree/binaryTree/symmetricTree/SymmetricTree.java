@@ -1,5 +1,7 @@
 package ca.monor.leetCode.tree.binaryTree.symmetricTree;
 
+import java.util.Stack;
+
 /**
  * 101. Symmetric Tree
  * https://leetcode.com/problems/symmetric-tree/
@@ -18,10 +20,49 @@ public class SymmetricTree {
     }
 
     public boolean isSymmetric(TreeNode root) {
-        if (root.left.val != root.right.val) {
+        if (root == null) {
+            return true;
+        }
+
+        Stack<TreeNode> stackLeft = new Stack<>();
+        Stack<TreeNode> stackRight = new Stack<>();
+
+        TreeNode left = root.left;
+        TreeNode right = root.right;
+
+        if (left == null && right == null) {
+            return true;
+        }
+
+        if (left == null || right == null || left.val != right.val) {
             return false;
         }
 
+        do {
+            if (left != null) {
+                stackLeft.push(left);
+                left = left.left;
+            } else {
+                left = stackLeft.pop();
+                left = left.right;
+            }
+
+            if (right != null) {
+                stackRight.push(right);
+                right = right.right;
+            } else {
+                right = stackRight.pop();
+                right = right.left;
+            }
+
+            if (left == null && right == null) {
+                continue;
+            }
+
+            if (left == null || right == null || left.val != right.val) {
+                return false;
+            }
+        } while (!stackLeft.isEmpty() && !stackRight.isEmpty() || left != null);
 
         return true;
     }
