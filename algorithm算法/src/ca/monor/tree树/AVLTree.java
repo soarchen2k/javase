@@ -15,7 +15,7 @@ public class AVLTree<E> extends BST<E> {
     @Override
     protected void afterAdd(Node<E> node) { //首先，新添加的节点一定是 leaf
         /**
-         * while 括号内的东西不理解
+         * while 括号内表示给 node 赋值为 node.parent，并且判断其不为空
          */
         while ((node = node.parent) != null) {
             if (isBalanced(node)) {
