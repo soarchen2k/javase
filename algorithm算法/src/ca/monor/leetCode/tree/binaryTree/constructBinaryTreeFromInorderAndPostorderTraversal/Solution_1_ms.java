@@ -11,35 +11,35 @@ public class Solution_1_ms {
         }
     }
 
-    private int pInorder;   // index of inorder array
-    private int pPostorder; // index of postorder array
+    private int indexInorder;   // index of inorder array
+    private int indexPostorder; // index of postorder array
 
     public TreeNode buildTree(int[] inorder, int[] postorder) {
-        pInorder = inorder.length - 1;
-        pPostorder = postorder.length - 1;
+        indexInorder = inorder.length - 1;
+        indexPostorder = postorder.length - 1;
 
         return buildTree(inorder, postorder, null);
     }
 
     private TreeNode buildTree(int[] inorder, int[] postorder, TreeNode end) {
-        if (pPostorder < 0) {
+        if (indexPostorder < 0) {
             return null;
         }
 
         // create root node
-        TreeNode n = new TreeNode(postorder[pPostorder--]);
+        TreeNode root = new TreeNode(postorder[indexPostorder--]);
 
         // if right node exist, create right subtree
-        if (inorder[pInorder] != n.val) {
-            n.right = buildTree(inorder, postorder, n);
+        if (inorder[indexInorder] != root.val) {
+            root.right = buildTree(inorder, postorder, root);
         }
 
-        pInorder--;
+        indexInorder--;
 
         // if left node exist, create left subtree
-        if ((end == null) || (inorder[pInorder] != end.val)) {
-            n.left = buildTree(inorder, postorder, end);
+        if ((end == null) || (inorder[indexInorder] != end.val)) {
+            root.left = buildTree(inorder, postorder, end);
         }
-        return n;
+        return root;
     }
 }
