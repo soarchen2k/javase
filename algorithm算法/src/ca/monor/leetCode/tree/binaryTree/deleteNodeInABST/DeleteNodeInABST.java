@@ -83,26 +83,33 @@ public class DeleteNodeInABST {
             root.left = deleteNode(root.left, key);
         } else {
             // we have to delete the root node itself
-            if (root.left == null) {
+            if (root.left == null) {  //如果左子树为空，直接返回右子树
                 return root.right;
-            } else if (root.right == null) {
+            } else if (root.right == null) {  //如果右子树为空，直接返回左子树
                 return root.left;
-            } else {
+            } else {  //如果左右子树均不为空，从右子树中找出后继结点
                 TreeNode newRoot = root.right, parent = null;
                 // find the smallest value in the right subtree
+                // 利用 while 循环查找右子树的最小值，也就是被删除的节点的后继结点
                 while (newRoot.left != null) {
                     parent = newRoot;
                     newRoot = newRoot.left;
                 }
                 // right node is the smallest node in the right subtree
+                // 如果 parent 为空，说明 while 循环没有被执行，右子节点即是右子树的最小节点
                 if (parent == null) {
                     // connect the left subtree to new root node
+                    // 将右子节点的 left 指向原 root 节点的 left，断开 root 节点与 left 的关系
                     newRoot.left = root.left;
                     return newRoot;
                 }
-                parent.left = newRoot.right;
+
+                // 当 parent 不为空的时候，也就是 newRoot 有左子节点
+                parent.left = newRoot.right;  // 断开 parent 与 newRoot 的关系，
+                // newRoot 如果有右，则为 newRoot 的后继，如果没有右则 parent 的左为空
                 newRoot.left = root.left;
-                newRoot.right = root.right;
+                newRoot.right = root.right;//通过建立 newRoot 与原 root 的左右子节点的关系，
+                // 来断开 root 与原左右子节点的关系，从而达到删除 root 的目的
                 return newRoot;
             }
         }
