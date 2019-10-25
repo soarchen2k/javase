@@ -34,7 +34,7 @@ public class Solution_1_ms {
         if (indexPostorder < 0) { return null;}
 
         // create root node
-        // 创建 root 节点，--为先使用值，然后再减去1
+        // 创建 root 节点，然后把 index - 1
         TreeNode root = new TreeNode(postorder[indexPostorder--]);
 
         // if right node exist, create right subtree
@@ -51,7 +51,7 @@ public class Solution_1_ms {
 
         // if left node exist, create left subtree
         // 如果传入的 end 为空，或中序遍历的 index 位置的值
-        // 等于 end 节点的值，则该节点有左子树
+        // 不等于 end 节点的值，则该节点有左子树
 
         if ((end == null) || (inorder[indexInorder] != end.val)) {
             root.left = buildTree(inorder, postorder, end);
