@@ -1,5 +1,10 @@
 package ca.monor.leetCode.set.intersectionOfTwoArrays;
 
+/**
+ * 349. Intersection of Two Arrays
+ * https://leetcode.com/problems/intersection-of-two-arrays/
+ */
+
 import java.util.HashSet;
 import java.util.Set;
 
