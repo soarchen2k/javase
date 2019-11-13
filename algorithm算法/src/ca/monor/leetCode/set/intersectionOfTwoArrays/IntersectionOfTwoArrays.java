@@ -13,27 +13,27 @@ public class IntersectionOfTwoArrays {
         Set<Integer> set1 = getNewSet(nums1);
         Set<Integer> set2 = getNewSet(nums2);
         set1.retainAll(set2);
-        int[] res = getNewArray(set1);
-        return res;
+        return getNewArray(set1);
     }
 
-    private int[] getNewArray(Set<Integer> set1) {
-        int[] arr = new int[set1.size()];
+    private int[] getNewArray(Set<Integer> set) {
+        //把 set 转为 array
+        int[] arr = new int[set.size()];
         int index = 0;
         for (int value :
-                set1) {
+                set) {
             arr[index++] = value;
         }
         return arr;
     }
 
     private Set<Integer> getNewSet(int[] nums) {
+        //把 array 转为 set
         Set<Integer> set = new HashSet<>();
         for (int value :
                 nums) {
             set.add(value);
         }
         return set;
-
     }
 }
