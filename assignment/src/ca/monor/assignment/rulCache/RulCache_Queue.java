@@ -23,4 +23,11 @@ public class RulCache_Queue<E> {
         cache.poll();
         cache.offer(element);
     }
+
+    @Override
+    public String toString() {
+        return "RulCache_Queue{" +
+                "cache=" + cache +
+                '}';
+    }
 }

@@ -2,7 +2,7 @@ package ca.monor.assignment.rulCache;
 
 public class Main {
     public static void main(String[] args) {
-        RulCache_LinkedList<Integer> rulCacheArrayList = new RulCache_LinkedList<>();
+        RulCache_Queue<Integer> rulCacheArrayList = new RulCache_Queue<>();
         rulCacheArrayList.add(1);
         rulCacheArrayList.add(2);
         rulCacheArrayList.add(3);
