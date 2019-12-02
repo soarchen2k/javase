@@ -14,7 +14,7 @@ public class ReversStringList {
         if (string == null) {
             return null;
         }
-        return listToString(revers(stringToLIst(string)));
+        return listToString(revers2(stringToLIst(string)));
     }
 
     /*
@@ -35,6 +35,7 @@ public class ReversStringList {
 
     /*
     反转 list 并返回反转后的 list
+    迭代
      */
     private static ListNode revers(ListNode head) {
         if (head == null || head.next == null) {
@@ -47,6 +48,19 @@ public class ReversStringList {
             newHead = head;
             head = next;
         }
+        return newHead;
+    }
+
+    /*
+    反转 list 并返回反转后的 list
+    递归
+    */
+    private static ListNode revers2(ListNode head) {
+        if (head == null || head.next == null) return head;
+
+        ListNode newHead = revers2(head.next);
+        head.next.next = head;
+        head.next = null;
         return newHead;
     }
 
