@@ -2,7 +2,7 @@ package ca.monor.assignment.reversString;
 
 public class ReversStringList {
     public static void main(String[] args) {
-        String string = "ABCDEFG";
+        String string = "ABCD EFG";
         System.out.println(revers(string));
 //        revers(string);
     }
