@@ -23,7 +23,7 @@ public class ReverseLinkedList {
             return head;
         }
 
-        ListNode newHead = null;  // 新建一个链表，newHead树新链表的 head，指向 null
+        ListNode newHead = null;  // 新建一个node，newHead 新链表的 head，指向 null
         while (head != null) { // 当前链表 head 不为空则进行循环
             ListNode next = head.next;  // 用 ListNode next 记录原链表剩余元素
             head.next = newHead;  // 让 head.next 指向 newHead，断开 head 与 后面的联系
