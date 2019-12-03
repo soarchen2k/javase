@@ -27,7 +27,7 @@ public class ReversStringList {
         StringBuilder sb = new StringBuilder();
         ListNode temp = head;
         while (temp != null) {
-            sb.append(temp.c);
+            sb.append(temp.value);
             temp = temp.next;
         }
         return sb.toString();
@@ -78,17 +78,17 @@ public class ReversStringList {
     }
 
     private static class ListNode {
-        char c;
+        char value;
         ListNode next;
 
-        public ListNode(char c) {
-            this.c = c;
+        public ListNode(char value) {
+            this.value = value;
         }
 
         @Override
         public String toString() {
             StringBuilder sb = new StringBuilder();
-            sb.append(c).append(next);
+            sb.append(value).append(next);
             return sb.toString();
         }
     }
