@@ -1,4 +1,4 @@
-package SimpleFactory;
+package simpleFactory;
 
 public class Apple implements Fruit {
     private String color;

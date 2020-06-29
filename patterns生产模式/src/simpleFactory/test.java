@@ -1,4 +1,4 @@
-package SimpleFactory;
+package simpleFactory;
 
 public class test {
     public static void main(String[] args) throws InstantiationException, IllegalAccessException {
